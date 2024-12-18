@@ -4,13 +4,12 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { CountdownTimer } from "@/components/dashboard/countdown-timer"
 import {
-  Gift,
   Home,
-  ListTodo,
-  Settings,
-  Star,
-  LogOut,
+  Gift,
+  Award,
   Calendar,
+  Settings,
+  LogOut,
 } from "lucide-react"
 import type { UserProfile } from "@/types"
 
@@ -31,7 +30,7 @@ export function Sidebar({ className, user, onLogout }: SidebarProps) {
                 {user.avatar || '🎅'}
               </div>
               <div className="absolute -bottom-2 -right-2 bg-christmas-green text-white text-xs px-2 py-1 rounded-full">
-                Score: {user.niceScore}
+                Score: {user.nice_score}
               </div>
             </div>
           </div>
@@ -63,7 +62,7 @@ export function Sidebar({ className, user, onLogout }: SidebarProps) {
               My Wishes
             </Button>
             <Button variant="ghost" className="w-full justify-start text-christmas-green hover:text-christmas-red">
-              <Star className="mr-2 h-4 w-4" />
+              <Award className="mr-2 h-4 w-4" />
               Achievements
             </Button>
             <Button variant="ghost" className="w-full justify-start text-christmas-green hover:text-christmas-red">

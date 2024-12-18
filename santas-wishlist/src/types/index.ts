@@ -22,21 +22,13 @@ export interface Achievement {
 
 export interface UserProfile {
   id: string
+  user_id: string
   username: string
-  avatar?: string
-  niceScore: number // 0-100
+  avatar?: string | null
+  nice_score: number
   achievements: Achievement[]
-  preferences: {
-    theme: 'light' | 'dark'
-    notifications: boolean
-    language: string
-  }
-  stats: {
-    totalWishes: number
-    approvedWishes: number
-    deliveredWishes: number
-    achievementsUnlocked: number
-  }
+  created_at: string
+  updated_at: string
 }
 
 export interface WishStatistics {

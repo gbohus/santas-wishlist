@@ -16,7 +16,7 @@ export function checkAchievements(wishes: Wish[], profile: UserProfile): Achieve
   }
 
   // Check Good Child
-  if (profile.niceScore >= 80 && !achievements.find(a => a.id === 'good_child')?.unlockedAt) {
+  if (profile.nice_score >= 80 && !achievements.find(a => a.id === 'good_child')?.unlockedAt) {
     unlockedAchievements.push('good_child')
   }
 
@@ -58,7 +58,7 @@ export function getAchievementProgress(wishes: Wish[], profile: UserProfile): Re
   progress['wish_master'] = Math.min((wishes.length / 5) * 100, 100)
 
   // Good Child Progress
-  progress['good_child'] = Math.min((profile.niceScore / 80) * 100, 100)
+  progress['good_child'] = Math.min((profile.nice_score / 80) * 100, 100)
 
   // Holiday Spirit Progress (simplified)
   const recentWishes = wishes.filter(wish => {

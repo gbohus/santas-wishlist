@@ -37,20 +37,13 @@ const DEFAULT_ACHIEVEMENTS: Achievement[] = [
 // Default user profile
 const DEFAULT_USER_PROFILE: UserProfile = {
   id: '1',
+  user_id: '1',
   username: '',
-  niceScore: 75,
+  avatar: null,
+  nice_score: 75,
   achievements: [],
-  preferences: {
-    theme: 'light',
-    notifications: true,
-    language: 'en',
-  },
-  stats: {
-    totalWishes: 0,
-    approvedWishes: 0,
-    deliveredWishes: 0,
-    achievementsUnlocked: 0,
-  },
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString()
 }
 
 class StorageService {
@@ -104,11 +97,6 @@ class StorageService {
     if (achievement && !achievement.unlockedAt) {
       achievement.unlockedAt = new Date().toISOString()
       this.setItem(STORAGE_KEYS.ACHIEVEMENTS, achievements)
-      
-      // Update user profile stats
-      const profile = this.getUserProfile()
-      profile.stats.achievementsUnlocked += 1
-      this.setUserProfile(profile)
     }
     return achievements
   }

@@ -30,11 +30,6 @@ export function WishForm({ onSubmit }: WishFormProps) {
 
   return (
     <div className="space-y-6">
-      <div className="text-center space-y-2">
-        <h2 className="text-2xl font-bold text-christmas-red">Write Your Wish to Santa! 🎄</h2>
-        <p className="text-christmas-green">Tell Santa what you'd like for Christmas!</p>
-      </div>
-
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
           <label className="text-sm font-medium text-christmas-green" htmlFor="wish-title">

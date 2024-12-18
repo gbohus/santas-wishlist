@@ -55,7 +55,7 @@ export function CountdownTimer({ variant = 'default' }: CountdownTimerProps) {
           Time Until Christmas! 🎄
         </div>
         <div className="flex items-center justify-center space-x-2">
-          {timeUnits.map(({ label, value }, index) => (
+          {timeUnits.map(({ label, value }) => (
             <div key={label} className="text-center">
               <div className="bg-white/70 rounded-lg px-2 py-1">
                 <span className={cn(
@@ -90,23 +90,14 @@ export function CountdownTimer({ variant = 'default' }: CountdownTimerProps) {
               </h3>
               
               <div className="flex items-center space-x-3">
-                {timeUnits.map(({ label, value }, index) => (
+                {timeUnits.map(({ label, value }, idx) => (
                   <div key={label} className="flex items-center">
                     <div className="text-center">
-                      <span className={cn(
-                        "text-xl font-bold tabular-nums",
-                        value <= 5 
-                          ? "text-christmas-red animate-pulse" 
-                          : "text-christmas-green"
-                      )}>
-                        {value.toString().padStart(2, '0')}
-                      </span>
-                      <span className="text-xs text-christmas-green/60 ml-1">
-                        {label.charAt(0)}
-                      </span>
+                      <div className="text-4xl font-bold">{value}</div>
+                      <div className="text-sm text-gray-500">{label}</div>
                     </div>
-                    {index < timeUnits.length - 1 && (
-                      <span className="text-christmas-gold mx-1">:</span>
+                    {idx < timeUnits.length - 1 && (
+                      <div className="text-2xl mx-2">:</div>
                     )}
                   </div>
                 ))}

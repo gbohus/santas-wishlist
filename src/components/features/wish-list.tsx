@@ -5,14 +5,15 @@ import { Spinner } from "@/components/ui/spinner"
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import { Edit2, Trash2, Check, Clock } from "lucide-react"
-import type { Wish } from "@/lib/api"
+import { WishTimeline } from "./wish-timeline"
+import type { Wish } from "@/types"
 
 interface WishListProps {
   wishes: Wish[]
   onDelete: (id: string) => Promise<void>
   onUpdate: (id: string, updates: Partial<Wish>) => Promise<void>
   isLoading?: boolean
-  variant?: 'default' | 'card'
+  variant?: 'default' | 'card' | 'timeline'
 }
 
 export function WishList({ wishes, onDelete, onUpdate, isLoading, variant = 'default' }: WishListProps) {
@@ -51,10 +52,10 @@ export function WishList({ wishes, onDelete, onUpdate, isLoading, variant = 'def
     setEditForm({ title: wish.title, description: wish.description })
   }
 
-  const handleUpdate = async (id: string) => {
+  const handleUpdate = async (id: string, updates: Partial<Wish>) => {
     try {
       setLoadingId(id)
-      await onUpdate(id, editForm)
+      await onUpdate(id, updates)
       setEditingId(null)
     } finally {
       setLoadingId(null)
@@ -72,6 +73,10 @@ export function WishList({ wishes, onDelete, onUpdate, isLoading, variant = 'def
     }
   }
 
+  const handleStatusUpdate = async (wishId: string, newStatus: Wish['status']) => {
+    await handleUpdate(wishId, { status: newStatus })
+  }
+
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
@@ -85,6 +90,20 @@ export function WishList({ wishes, onDelete, onUpdate, isLoading, variant = 'def
       <div className="text-center py-12">
         <h3 className="text-xl font-bold text-christmas-red mb-2">Your Wishlist is Empty!</h3>
         <p className="text-christmas-green">Time to write your wishes to Santa! 🎅</p>
+      </div>
+    )
+  }
+
+  if (variant === 'timeline') {
+    return (
+      <div className="space-y-4">
+        {wishes.map((wish) => (
+          <WishTimeline
+            key={wish.id}
+            wish={wish}
+            onStatusUpdate={handleStatusUpdate}
+          />
+        ))}
       </div>
     )
   }
@@ -110,7 +129,7 @@ export function WishList({ wishes, onDelete, onUpdate, isLoading, variant = 'def
                 <div className="flex gap-2">
                   <Button
                     variant="christmas"
-                    onClick={() => handleUpdate(wish.id)}
+                    onClick={() => handleUpdate(wish.id, editForm)}
                     disabled={loadingId === wish.id}
                     size="sm"
                   >
@@ -204,7 +223,7 @@ export function WishList({ wishes, onDelete, onUpdate, isLoading, variant = 'def
               <div className="flex gap-2">
                 <Button
                   variant="christmas"
-                  onClick={() => handleUpdate(wish.id)}
+                  onClick={() => handleUpdate(wish.id, editForm)}
                   disabled={loadingId === wish.id}
                 >
                   {loadingId === wish.id ? <Spinner size="sm" /> : 'Save'}

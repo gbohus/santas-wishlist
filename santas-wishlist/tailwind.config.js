@@ -91,6 +91,11 @@ module.exports = {
         sparkle: {
           "0%, 100%": { opacity: "1", transform: "scale(1)" },
           "50%": { opacity: "0.5", transform: "scale(0.95)" }
+        },
+        gradient: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" }
         }
       },
       animation: {
@@ -100,7 +105,8 @@ module.exports = {
         "bounce-slow": "bounce-slow 3s ease-in-out infinite",
         "bounce-slower": "bounce-slower 4s ease-in-out infinite",
         "pulse-slow": "pulse-slow 4s ease-in-out infinite",
-        "sparkle": "sparkle 2s ease-in-out infinite"
+        "sparkle": "sparkle 2s ease-in-out infinite",
+        "gradient": "gradient 6s ease infinite"
       },
     },
   },
